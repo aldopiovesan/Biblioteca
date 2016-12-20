@@ -41,9 +41,14 @@ public class DemoBiblioteca {
 
         Prestito p;
 
-        p = new Prestito(1, 1, "uyjttythtyjtyjyjjk"+ new Date().toString());
+        p = new Prestito(2, 1, ""+ new Date().toString() +" - "+ c1.getNome());
 
         bib.getElencoPrestiti().add(p);
+        
+       
+        
+        
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -7,6 +7,7 @@ package biblioteca;
 
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -336,11 +337,20 @@ public class DemoWinBiblio extends javax.swing.JFrame {
 
         int indexCliente = jClienti.getSelectedIndex();
         int indexLibro = jLibri.getSelectedIndex();
-        indexCliente= bib.getElencoClienti().get(indexCliente).getCodCliente();
-        indexLibro= bib.getElencoLibri().get(indexLibro).getCodLibro();
-        dip.addNewPrestito(indexCliente, indexLibro, jClienti.getSelectedValue() + " -" + jLibri.getSelectedValue() , bib);
-        refreshPrestiti();
+        indexCliente = bib.getElencoClienti().get(indexCliente).getCodCliente();
+        indexLibro = bib.getElencoLibri().get(indexLibro).getCodLibro();
+
+        if (bib.isDisponibile(indexLibro) && !bib.isClienteLimiteMax(indexCliente)) {
+
+            //vincolata alla disponibilita del libro    
+            dip.addNewPrestito(indexCliente, indexLibro, jClienti.getSelectedValue() + " -" + jLibri.getSelectedValue(), bib);
+            refreshPrestiti();
     }//GEN-LAST:event_jAddNewPrestitoActionPerformed
+        else {
+            JOptionPane.showMessageDialog(null, "Libro gia in prestito o cliente al limite");
+        }
+
+    }
 
     /**
      * @param args the command line arguments
